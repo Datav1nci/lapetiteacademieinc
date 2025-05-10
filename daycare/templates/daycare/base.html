@@ -1,0 +1,59 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="{% get_current_language %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% trans "La Petite Académie - Daycare in Hochelaga, Montreal" %}{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-pink-50 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-4 sticky top-0 z-10 shadow-md">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">{% trans "La Petite Académie" %}</h1>
+            <nav class="flex items-center space-x-4">
+                <a href="#accueil" class="hover:underline">{% trans "Home" %}</a>
+                <a href="#services" class="hover:underline">{% trans "Services" %}</a>
+                <a href="#contact" class="hover:underline">{% trans "Contact" %}</a>
+                <div class="relative">
+                    <button id="lang-toggle" class="bg-white text-blue-600 px-3 py-1 rounded-full hover:bg-gray-100">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% if LANGUAGE_CODE == 'fr' %}English{% else %}Français{% endif %}
+                    </button>
+                    <div id="lang-dropdown" class="absolute hidden mt-2 bg-white rounded-md shadow-lg">
+                        <a href="{% url 'set_language' 'fr' %}" class="block px-4 py-2 text-blue-600 hover:bg-gray-100">Français</a>
+                        <a href="{% url 'set_language' 'en' %}" class="block px-4 py-2 text-blue-600 hover:bg-gray-100">English</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>© 2025 {% trans "La Petite Académie" %}. {% trans "All rights reserved." %}</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language toggle dropdown
+        document.getElementById('lang-toggle').addEventListener('click', function() {
+            document.getElementById('lang-dropdown').classList.toggle('hidden');
+        });
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('lang-dropdown');
+            const button = document.getElementById('lang-toggle');
+            if (!dropdown.contains(event.target) && !button.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

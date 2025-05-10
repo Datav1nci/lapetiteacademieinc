@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: La Petite Académie\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-10 12:00-0400\n"
+"PO-Revision-Date: 2025-05-10 12:00-0400\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "La Petite Académie - Daycare in Hochelaga, Montreal"
+msgstr "La Petite Académie - Daycare in Hochelaga, Montreal"
+
+msgid "La Petite Académie"
+msgstr "La Petite Académie"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Services"
+msgstr "Services"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Welcome to La Petite Académie"
+msgstr "Welcome to La Petite Académie"
+
+msgid "A warm and educational daycare for children 18 months and older in Hochelaga, Montreal."
+msgstr "A warm and educational daycare for children 18 months and older in Hochelaga, Montreal."
+
+msgid "Contact Us"
+msgstr "Contact Us"
+
+msgid "Our Services"
+msgstr "Our Services"
+
+msgid "Educational Program"
+msgstr "Educational Program"
+
+msgid "Engaging activities to foster creativity and learning for young children."
+msgstr "Engaging activities to foster creativity and learning for young children."
+
+msgid "Safe Environment"
+msgstr "Safe Environment"
+
+msgid "A secure and welcoming space for children to thrive."
+msgstr "A secure and welcoming space for children to thrive."
+
+msgid "Nutritious Meals"
+msgstr "Nutritious Meals"
+
+msgid "Healthy and balanced menus tailored to young children’s needs."
+msgstr "Healthy and balanced menus tailored to young children’s needs."
+
+msgid "Daily Park Outings"
+msgstr "Daily Park Outings"
+
+msgid "Daily walks and outdoor play to encourage physical activity."
+msgstr "Daily walks and outdoor play to encourage physical activity."
+
+msgid "Children’s Shows"
+msgstr "Children’s Shows"
+
+msgid "Fun and educational performances to spark children’s imagination."
+msgstr "Fun and educational performances to spark children’s imagination."
+
+msgid "Creative Workshops"
+msgstr "Creative Workshops"
+
+msgid "Art and craft activities to develop fine motor skills and creativity."
+msgstr "Art and craft activities to develop fine motor skills and creativity."
+
+msgid "Phone"
+msgstr "Phone"
+
+msgid "For any questions or to enroll your child, contact us today!"
+msgstr "For any questions or to enroll your child, contact us today!"
+
+msgid "Send an Email"
+msgstr "Send an Email"
+
+msgid "All rights reserved."
+msgstr "All rights reserved."

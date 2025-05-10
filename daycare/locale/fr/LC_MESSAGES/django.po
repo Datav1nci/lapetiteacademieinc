@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: La Petite Académie\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-10 12:00-0400\n"
+"PO-Revision-Date: 2025-05-10 12:00-0400\n"
+"Last-Translator: \n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "La Petite Académie - Daycare in Hochelaga, Montreal"
+msgstr "La Petite Académie - Garderie à Hochelaga, Montréal"
+
+msgid "La Petite Académie"
+msgstr "La Petite Académie"
+
+msgid "Home"
+msgstr "Accueil"
+
+msgid "Services"
+msgstr "Services"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Welcome to La Petite Académie"
+msgstr "Bienvenue à La Petite Académie"
+
+msgid "A warm and educational daycare for children 18 months and older in Hochelaga, Montreal."
+msgstr "Une garderie chaleureuse et éducative pour les enfants de 18 mois et plus à Hochelaga, Montréal."
+
+msgid "Contact Us"
+msgstr "Contactez-nous"
+
+msgid "Our Services"
+msgstr "Nos Services"
+
+msgid "Educational Program"
+msgstr "Programme Éducatif"
+
+msgid "Engaging activities to foster creativity and learning for young children."
+msgstr "Activités stimulantes pour développer la créativité et l’apprentissage des tout-petits."
+
+msgid "Safe Environment"
+msgstr "Environnement Sûr"
+
+msgid "A secure and welcoming space for children to thrive."
+msgstr "Un espace sécurisé et accueillant pour que les enfants s’épanouissent."
+
+msgid "Nutritious Meals"
+msgstr "Repas Nutritifs"
+
+msgid "Healthy and balanced menus tailored to young children’s needs."
+msgstr "Menus sains et équilibrés adaptés aux besoins des jeunes enfants."
+
+msgid "Daily Park Outings"
+msgstr "Sorties au Parc Quotidiennes"
+
+msgid "Daily walks and outdoor play to encourage physical activity."
+msgstr "Promenades et jeux en plein air chaque jour pour encourager l’activité physique."
+
+msgid "Children’s Shows"
+msgstr "Spectacles pour Enfants"
+
+msgid "Fun and educational performances to spark children’s imagination."
+msgstr "Présentations ludiques et éducatives pour stimuler l’imagination des enfants."
+
+msgid "Creative Workshops"
+msgstr "Ateliers Créatifs"
+
+msgid "Art and craft activities to develop fine motor skills and creativity."
+msgstr "Activités artistiques et manuelles pour développer la motricité fine et la créativité."
+
+msgid "Phone"
+msgstr "Téléphone"
+
+msgid "For any questions or to enroll your child, contact us today!"
+msgstr "Pour toute question ou pour inscrire votre enfant, contactez-nous dès aujourd’hui !"
+
+msgid "Send an Email"
+msgstr "Envoyer un courriel"
+
+msgid "All rights reserved."
+msgstr "Tous droits réservés."
