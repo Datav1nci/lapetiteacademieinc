@@ -1,141 +1,84 @@
-{% load i18n %}
+{% load static %}
 <!DOCTYPE html>
-<html lang="{% get_current_language %}">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{% trans 'La petite Académie is a premier daycare offering bilingual programs, safe environment, and nutritious meals for children aged 18 months to 5 years in Montreal’s Hochelaga neighbourhood.' %}">
-  <title>{% trans "La petite Académie" %}</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3/dist/tailwind.min.css" rel="stylesheet">
+  <title>La petite Académie</title>
+  <link href="{% static 'css/tailwind.css' %}" rel="stylesheet">
 </head>
-<body class="font-sans antialiased">
+<body class="bg-gradient-to-r from-pink-50 via-yellow-50 to-green-50">
+  <!-- Navbar -->
+  <nav class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <div class="text-2xl font-bold text-pink-600">La petite Académie</div>
+    <div class="space-x-6">
+      <a href="#about" class="text-gray-700 hover:text-gray-900">About</a>
+      <a href="#programs" class="text-gray-700 hover:text-gray-900">Programs</a>
+      <a href="#gallery" class="text-gray-700 hover:text-gray-900">Gallery</a>
+      <a href="#contact" class="text-gray-700 hover:text-gray-900">Contact</a>
+    </div>
+  </nav>
 
-  <header class="bg-white shadow">
-    <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="#" class="text-2xl font-bold">{% trans "La petite Académie" %}</a>
-      <div class="flex space-x-2">
-        <button @click="window.location.search='?lang=fr'" class="px-3 py-1 border rounded hover:bg-gray-100 transition">
-          {% trans "Français" %}
-        </button>
-        <button @click="window.location.search='?lang=en'" class="px-3 py-1 border rounded hover:bg-gray-100 transition">
-          {% trans "English" %}
-        </button>
-      </div>
-    </nav>
+  <!-- Hero -->
+  <header class="text-center py-20">
+    <h1 class="text-5xl font-extrabold text-pink-500 mb-4">Bienvenue à La petite Académie</h1>
+    <p class="text-xl text-gray-700 mb-8">3401 Rue Ontario E, Montréal, QC H1W 1R1</p>
+    <a href="#contact" class="px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition animate-bounce">Planifier une visite</a>
   </header>
 
-  <section class="relative bg-cover bg-center h-screen" style="background-image: url('https://via.placeholder.com/1600x600?text=Hero+Image')">
-    <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white px-4">
-      <h1 class="text-4xl md:text-6xl font-extrabold mb-4">
-        {% trans "Bienvenue à La petite Académie" %}
-      </h1>
-      <p class="text-lg md:text-2xl mb-6">
-        {% trans "A nurturing environment for children aged 18 months to 5 years." %}
-      </p>
-      <a href="#contact" class="bg-yellow-400 text-black px-6 py-3 rounded-full text-lg font-semibold hover:bg-yellow-500 transition">
-        {% trans "Book a Tour" %}
-      </a>
+  <!-- About -->
+  <section id="about" class="max-w-4xl mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-gray-800 mb-4">Notre Mission</h2>
+    <p class="text-gray-600 leading-relaxed">
+      À La petite Académie, nous offrons un environnement sécuritaire, stimulant et amusant pour vos enfants. Notre équipe dévouée favorise l'épanouissement et la créativité dès le plus jeune âge.
+    </p>
+  </section>
+
+  <!-- Programs -->
+  <section id="programs" class="bg-white py-16">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center p-6 bg-pink-50 rounded-2xl shadow">
+        <h3 class="text-2xl font-semibold text-pink-600 mb-2">Nourrissons</h3>
+        <p class="text-gray-600">Accompagnement personnalisé pour les tout-petits (0-12 mois).</p>
+      </div>
+      <div class="text-center p-6 bg-yellow-50 rounded-2xl shadow">
+        <h3 class="text-2xl font-semibold text-yellow-600 mb-2">Tout-petits</h3>
+        <p class="text-gray-600">Activités adaptées pour stimuler vos enfants (1-3 ans).</p>
+      </div>
+      <div class="text-center p-6 bg-green-50 rounded-2xl shadow">
+        <h3 class="text-2xl font-semibold text-green-600 mb-2">Préscolaire</h3>
+        <p class="text-gray-600">Préparation douce à l'école pour les 3-5 ans.</p>
+      </div>
     </div>
   </section>
 
-  <main class="container mx-auto px-4 py-12 space-y-20">
-
-    <section id="about" class="text-center">
-      <h2 class="text-3xl font-bold mb-4">{% trans "About Us" %}</h2>
-      <p class="text-lg text-gray-700 max-w-2xl mx-auto">
-        {% trans "At La petite Académie, we provide a safe, bilingual, and stimulating environment for your child’s growth and development." %}
-      </p>
-    </section>
-
-    <section id="programs">
-      <h2 class="text-3xl font-bold text-center mb-8">{% trans "Our Programs" %}</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Safe Environment Card -->
-        <div class="bg-white shadow rounded-lg p-6 text-center">
-          <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-            <!-- Safe Environment Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">{% trans "Safe Environment" %}</h3>
-          <p class="text-gray-600">
-            {% trans "Our facilities are designed to ensure the safety and comfort of every child." %}
-          </p>
-        </div>
-        <!-- Bilingual Staff Card -->
-        <div class="bg-white shadow rounded-lg p-6 text-center">
-          <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
-            <!-- Bilingual Staff Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">{% trans "Bilingual Staff" %}</h3>
-          <p class="text-gray-600">
-            {% trans "Our team speaks both English and French to support your child’s learning journey." %}
-          </p>
-        </div>
-        <!-- Nutritious Meals Card -->
-        <div class="bg-white shadow rounded-lg p-6 text-center">
-          <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-            <!-- Nutritious Meals Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">{% trans "Nutritious Meals" %}</h3>
-          <p class="text-gray-600">
-            {% trans "Healthy and balanced meals prepared daily for growing bodies." %}
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="max-w-xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-4">{% trans "Contact" %}</h2>
-      <p class="text-center text-gray-700 mb-6">
-        {% trans "3401 Rue Ontario E, Montreal, QC H1W 1R1" %}
-      </p>
-      <form action="#" method="post" class="space-y-4">
-        {% csrf_token %}
-        <input type="text" name="name" placeholder="{% trans "Your Name" %}" class="w-full border rounded px-4 py-2" />
-        <input type="email" name="email" placeholder="{% trans "Your Email" %}" class="w-full border rounded px-4 py-2" />
-        <textarea name="message" rows="4" placeholder="{% trans "Your Message" %}" class="w-full border rounded px-4 py-2"></textarea>
-        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700 transition">
-          {% trans "Send Message" %}
-        </button>
-      </form>
-    </section>
-
-  </main>
-
-  <footer class="bg-gray-800 text-gray-200 py-6">
-    <div class="container mx-auto px-4 text-center space-y-4">
-      <p>{% trans "3401 Rue Ontario E, Montreal, QC H1W 1R1" %}</p>
-      <div class="flex justify-center space-x-6">
-        <a href="#" aria-label="{% trans "Facebook" %}" class="hover:text-white">
-          <!-- Facebook Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4H15c-1.2 0-1.6.8-1.6 1.6V12H18l-.5 3h-3v7A10 10 0 0022 12z"/>
-          </svg>
-        </a>
-        <a href="#" aria-label="{% trans "Instagram" %}" class="hover:text-white">
-          <!-- Instagram Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.8-1.2a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/>
-          </svg>
-        </a>
-        <a href="#" aria-label="{% trans "Twitter" %}" class="hover:text-white">
-          <!-- Twitter Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M22.46 6c-.77.35-1.5.58-2.27.69a4 4 0 001.72-2.21 8.1 8.1 0 01-2.6 1 4 4 0 00-6.82 3.6 11.3 11.3 0 01-8.22-4.17 4 4 0 001.24 5.32 4 4 0 01-1.82-.5v.05a4 4 0 003.2 3.9 4 4 0 01-1.8.07 4 4 0 003.75 2.8A8.1 8.1 0 012 19.54a11.4 11.4 0 006.29 1.84c7.55 0 11.67-6.25 11.67-11.67 0-.18 0-.36-.01-.54A8.4 8.4 0 0022.46 6z"/>
-          </svg>
-        </a>
-      </div>
+  <!-- Gallery -->
+  <section id="gallery" class="max-w-6xl mx-auto px-4 py-16">
+    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Galerie</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Placeholder images -->
+      <img src="{% static 'images/kids1.jpg' %}" alt="Kids playing" class="rounded-lg shadow">
+      <img src="{% static 'images/kids2.jpg' %}" alt="Arts and crafts" class="rounded-lg shadow">
+      <img src="{% static 'images/kids3.jpg' %}" alt="Reading time" class="rounded-lg shadow">
+      <img src="{% static 'images/kids4.jpg' %}" alt="Outdoor play" class="rounded-lg shadow">
+      <img src="{% static 'images/kids5.jpg' %}" alt="Snack time" class="rounded-lg shadow">
+      <img src="{% static 'images/kids6.jpg' %}" alt="Group activity" class="rounded-lg shadow">
     </div>
-  </footer>
+  </section>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- Contact -->
+  <section id="contact" class="bg-white py-16">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold text-gray-800 mb-4">Contactez-nous</h2>
+      <p class="text-gray-600 mb-2">3401 Rue Ontario E, Montréal, QC H1W 1R1</p>
+      <p class="text-gray-600 mb-4">Téléphone: <a href="tel:+14388264166" class="text-pink-500">438-826-4166</a></p>
+      <a href="tel:+14388264166" class="px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition">Appelez-nous</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-pink-100">
+    <p class="text-gray-700">© 2025 La petite Académie. Tous droits réservés.</p>
+  </footer>
 </body>
 </html>
