@@ -1,583 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Development Technology Landscape</title>
-    <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.9/babel.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3@7.8.5/dist/d3.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .node:hover { stroke: #000; stroke-width: 2px; }
-        .link { stroke: #999; stroke-opacity: 0.6; }
-        .tab { transition: background-color 0.3s; }
-        .tab:hover { background-color: #e5e7eb; }
-        #graph { width: 100%; height: 100%; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="La Petite Académie, a Montessori daycare in Montreal, nurturing children aged 18 months to 5 years with a child-centered approach.">
+  <meta name="keywords" content="Montessori, daycare, Montreal, childcare, preschool, early childhood">
+  <meta name="author" content="La Petite Académie">
+  <title>La Petite Académie - Montessori Daycare in Montreal</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    .hero-bg { background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1596462502278-27bf71533255?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center; }
+    .language-toggle { transition: all 0.3s ease; }
+    .language-toggle:hover { transform: scale(1.05); }
+    .child-friendly { font-family: 'Comic Neue', cursive; color: #f59e0b; }
+    .section-bg { background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center; background-size: cover; }
+  </style>
 </head>
-<body>
-    <div id="root"></div>
-    <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-yellow-500 child-friendly">La Petite Académie</h1>
+      <div class="flex space-x-4">
+        <button id="lang-en" class="language-toggle px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 focus:outline-none">English</button>
+        <button id="lang-fr" class="language-toggle px-3 py-1 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 focus:outline-none">Français</button>
+      </div>
+    </div>
+  </header>
 
-        const techData = {
-            stacks: {
-                nodes: [
-                    { id: "Frontend", group: 1, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "React", group: 1, extensions: ".jsx, .tsx", isSecurity: false, securityDetails: "" },
-                    { id: "Vue", group: 1, extensions: ".vue", isSecurity: false, securityDetails: "" },
-                    { id: "Angular", group: 1, extensions: ".ts, .html", isSecurity: false, securityDetails: "" },
-                    { id: "Svelte", group: 1, extensions: ".svelte", isSecurity: false, securityDetails: "" },
-                    { id: "Tailwind CSS", group: 1, extensions: ".css", isSecurity: false, securityDetails: "" },
-                    { id: "Flutter", group: 1, extensions: ".dart", isSecurity: false, securityDetails: "" },
-                    { id: "Xamarin", group: 1, extensions: ".cs, .xaml", isSecurity: true, securityDetails: "Secure Storage, Auth" },
-                    { id: "Backend", group: 2, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "Node.js", group: 2, extensions: ".js", isSecurity: false, securityDetails: "" },
-                    { id: "Django", group: 2, extensions: ".py", isSecurity: false, securityDetails: "" },
-                    { id: "Ruby on Rails", group: 2, extensions: ".rb", isSecurity: false, securityDetails: "" },
-                    { id: "Spring", group: 2, extensions: ".java", isSecurity: false, securityDetails: "" },
-                    { id: "ASP.NET", group: 2, extensions: ".cs", isSecurity: false, securityDetails: "" },
-                    { id: "Database", group: 3, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "PostgreSQL", group: 3, extensions: ".sql", isSecurity: true, securityDetails: "SSL, pg_hba.conf" },
-                    { id: "MongoDB", group: 3, extensions: ".json", isSecurity: true, securityDetails: "Auth, TLS" },
-                    { id: "MySQL", group: 3, extensions: ".sql", isSecurity: true, securityDetails: "User Privileges, SSL" },
-                    { id: "Oracle DB", group: 3, extensions: ".sql", isSecurity: true, securityDetails: "Wallet, cwallet.sso" },
-                    { id: "DevOps", group: 4, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "Docker", group: 4, extensions: ".dockerfile", isSecurity: true, securityDetails: "Namespaces, Seccomp" },
-                    { id: "Kubernetes", group: 4, extensions: ".yaml", isSecurity: true, securityDetails: "RBAC, Pod Security" },
-                    { id: "Jenkins", group: 4, extensions: ".groovy", isSecurity: true, securityDetails: "Auth, CSRF Protection" },
-                    { id: "Security", group: 10, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "OAuth", group: 10, extensions: "", isSecurity: true, securityDetails: "Access Token, Refresh Token" },
-                    { id: "Google Auth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, OAuth 2.0" },
-                    { id: "Facebook Login", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, App Secret" },
-                    { id: "Twitter OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "API Key, Bearer Token" },
-                    { id: "GitHub OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Client ID, Access Token" },
-                    { id: "LinkedIn OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, Client Secret" },
-                    { id: "OpenID Connect", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, JWT" },
-                    { id: "Microsoft Azure AD", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, Access Token" }
-                ],
-                links: [
-                    { source: "Frontend", target: "React" },
-                    { source: "Frontend", target: "Vue" },
-                    { source: "Frontend", target: "Angular" },
-                    { source: "Frontend", target: "Svelte" },
-                    { source: "Frontend", target: "Tailwind CSS" },
-                    { source: "Frontend", target: "Flutter" },
-                    { source: "Frontend", target: "Xamarin" },
-                    { source: "Frontend", target: "Google Auth" },
-                    { source: "Frontend", target: "Facebook Login" },
-                    { source: "Frontend", target: "Microsoft Azure AD" },
-                    { source: "Backend", target: "Node.js" },
-                    { source: "Backend", target: "Django" },
-                    { source: "Backend", target: "Ruby on Rails" },
-                    { source: "Backend", target: "Spring" },
-                    { source: "Backend", target: "ASP.NET" },
-                    { source: "Backend", target: "OAuth" },
-                    { source: "Backend", target: "OpenID Connect" },
-                    { source: "Database", target: "PostgreSQL" },
-                    { source: "Database", target: "MongoDB" },
-                    { source: "Database", target: "MySQL" },
-                    { source: "Database", target: "Oracle DB" },
-                    { source: "DevOps", target: "Docker" },
-                    { source: "DevOps", target: "Kubernetes" },
-                    { source: "DevOps", target: "Jenkins" },
-                    { source: "Security", target: "OAuth" },
-                    { source: "Security", target: "Google Auth" },
-                    { source: "Security", target: "Facebook Login" },
-                    { source: "Security", target: "Twitter OAuth" },
-                    { source: "Security", target: "GitHub OAuth" },
-                    { source: "Security", target: "LinkedIn OAuth" },
-                    { source: "Security", target: "OpenID Connect" },
-                    { source: "Security", target: "Microsoft Azure AD" },
-                    { source: "Backend", target: "Frontend" },
-                    { source: "Backend", target: "Database" },
-                    { source: "DevOps", target: "Backend" }
-                ]
-            },
-            categories: {
-                nodes: [
-                    { id: "HTML", group: 1, extensions: ".html", isSecurity: false, securityDetails: "" },
-                    { id: "CSS", group: 1, extensions: ".css", isSecurity: false, securityDetails: "" },
-                    { id: "JavaScript", group: 1, extensions: ".js", isSecurity: false, securityDetails: "" },
-                    { id: "TypeScript", group: 1, extensions: ".ts", isSecurity: false, securityDetails: "" },
-                    { id: "Tailwind CSS", group: 1, extensions: ".css", isSecurity: false, securityDetails: "" },
-                    { id: "Dart", group: 1, extensions: ".dart", isSecurity: false, securityDetails: "" },
-                    { id: "Xamarin.Forms", group: 1, extensions: ".xaml", isSecurity: true, securityDetails: "Secure Storage, Auth" },
-                    { id: "Python", group: 2, extensions: ".py", isSecurity: false, securityDetails: "" },
-                    { id: "Ruby", group: 2, extensions: ".rb", isSecurity: false, securityDetails: "" },
-                    { id: "Java", group: 2, extensions: ".java", isSecurity: false, securityDetails: "" },
-                    { id: "PHP", group: 2, extensions: ".php", isSecurity: false, securityDetails: "" },
-                    { id: "C#", group: 2, extensions: ".cs", isSecurity: false, securityDetails: "" },
-                    { id: "SQL", group: 3, extensions: ".sql", isSecurity: true, securityDetails: "Injection Protection" },
-                    { id: "NoSQL", group: 3, extensions: ".json", isSecurity: true, securityDetails: "Access Control" },
-                    { id: "Oracle PL/SQL", group: 3, extensions: ".sql", isSecurity: true, securityDetails: "Roles, Privileges" },
-                    { id: "OAuth", group: 10, extensions: "", isSecurity: true, securityDetails: "Access Token, Refresh Token" },
-                    { id: "Google Auth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, OAuth 2.0" },
-                    { id: "Facebook Login", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, App Secret" },
-                    { id: "Twitter OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "API Key, Bearer Token" },
-                    { id: "GitHub OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Client ID, Access Token" },
-                    { id: "LinkedIn OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, Client Secret" },
-                    { id: "OpenID Connect", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, JWT" },
-                    { id: "Microsoft Azure AD", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, Access Token" }
-                ],
-                links: [
-                    { source: "HTML", target: "CSS" },
-                    { source: "HTML", target: "JavaScript" },
-                    { source: "CSS", target: "JavaScript" },
-                    { source: "CSS", target: "Tailwind CSS" },
-                    { source: "JavaScript", target: "TypeScript" },
-                    { source: "JavaScript", target: "Dart" },
-                    { source: "HTML", target: "Xamarin.Forms" },
-                    { source: "Python", target: "SQL" },
-                    { source: "Ruby", target: "SQL" },
-                    { source: "Java", target: "SQL" },
-                    { source: "PHP", target: "SQL" },
-                    { source: "C#", target: "SQL" },
-                    { source: "SQL", target: "NoSQL" },
-                    { source: "SQL", target: "Oracle PL/SQL" },
-                    { source: "Python", target: "OAuth" },
-                    { source: "Python", target: "Facebook Login" },
-                    { source: "Python", target: "GitHub OAuth" },
-                    { source: "OAuth", target: "Google Auth" },
-                    { source: "OAuth", target: "Facebook Login" },
-                    { source: "OAuth", target: "Twitter OAuth" },
-                    { source: "OAuth", target: "GitHub OAuth" },
-                    { source: "OAuth", target: "LinkedIn OAuth" },
-                    { source: "OAuth", target: "OpenID Connect" },
-                    { source: "OpenID Connect", target: "Google Auth" },
-                    { source: "OpenID Connect", target: "Microsoft Azure AD" }
-                ]
-            },
-            comparisons: {
-                nodes: [
-                    { id: "React", group: 1, extensions: ".jsx, .tsx", isSecurity: false, securityDetails: "" },
-                    { id: "Vue", group: 1, extensions: ".vue", isSecurity: false, securityDetails: "" },
-                    { id: "Angular", group: 1, extensions: ".ts, .html", isSecurity: false, securityDetails: "" },
-                    { id: "Svelte", group: 1, extensions: ".svelte", isSecurity: false, securityDetails: "" },
-                    { id: "Tailwind CSS", group: 1, extensions: ".css", isSecurity: false, securityDetails: "" },
-                    { id: "Bootstrap", group: 1, extensions: ".css", isSecurity: false, securityDetails: "" },
-                    { id: "Flutter", group: 1, extensions: ".dart", isSecurity: false, securityDetails: "" },
-                    { id: "Xamarin", group: 1, extensions: ".cs, .xaml", isSecurity: true, securityDetails: "Secure Storage, Auth" },
-                    { id: "Express", group: 2, extensions: ".js", isSecurity: false, securityDetails: "" },
-                    { id: "Django", group: 2, extensions: ".py", isSecurity: false, securityDetails: "" },
-                    { id: "Spring", group: 2, extensions: ".java", isSecurity: false, securityDetails: "" },
-                    { id: "Laravel", group: 2, extensions: ".php", isSecurity: false, securityDetails: "" },
-                    { id: "ASP.NET", group: 2, extensions: ".cs", isSecurity: false, securityDetails: "" },
-                    { id: "PostgreSQL", group: 3, extensions: ".sql", isSecurity: true, securityDetails: "SSL, pg_hba.conf" },
-                    { id: "MongoDB", group: 3, extensions: ".json", isSecurity: true, securityDetails: "Auth, TLS" },
-                    { id: "Oracle DB", group: 3, extensions: ".sql", isSecurity: true, securityDetails: "Wallet, cwallet.sso" },
-                    { id: "OAuth", group: 10, extensions: "", isSecurity: true, securityDetails: "Access Token, Refresh Token" },
-                    { id: "Google Auth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, OAuth 2.0" },
-                    { id: "Facebook Login", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, App Secret" },
-                    { id: "Twitter OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "API Key, Bearer Token" },
-                    { id: "GitHub OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Client ID, Access Token" },
-                    { id: "LinkedIn OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, Client Secret" },
-                    { id: "OpenID Connect", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, JWT" },
-                    { id: "Microsoft Azure AD", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, Access Token" },
-                    { id: "JWT", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Bearer Token, Signing" }
-                ],
-                links: [
-                    { source: "React", target: "Vue", value: 0.8 },
-                    { source: "Vue", target: "Angular", value: 0.7 },
-                    { source: "Angular", target: "Svelte", value: 0.6 },
-                    { source: "React", target: "Svelte", value: 0.7 },
-                    { source: "React", target: "Flutter", value: 0.7 },
-                    { source: "Flutter", target: "Xamarin", value: 0.8 },
-                    { source: "Tailwind CSS", target: "Bootstrap", value: 0.8 },
-                    { source: "Express", target: "Django", value: 0.7 },
-                    { source: "Django", target: "Spring", value: 0.6 },
-                    { source: "Spring", target: "Laravel", value: 0.6 },
-                    { source: "Express", target: "Laravel", value: 0.7 },
-                    { source: "ASP.NET", target: "Spring", value: 0.7 },
-                    { source: "ASP.NET", target: "Django", value: 0.6 },
-                    { source: "PostgreSQL", target: "MongoDB", value: 0.8 },
-                    { source: "MongoDB", target: "Oracle DB", value: 0.7 },
-                    { source: "OAuth", target: "Google Auth", value: 0.9 },
-                    { source: "OAuth", target: "Facebook Login", value: 0.9 },
-                    { source: "OAuth", target: "Twitter OAuth", value: 0.8 },
-                    { source: "OAuth", target: "GitHub OAuth", value: 0.9 },
-                    { source: "OAuth", target: "LinkedIn OAuth", value: 0.9 },
-                    { source: "OAuth", target: "OpenID Connect", value: 0.8 },
-                    { source: "OAuth", target: "Microsoft Azure AD", value: 0.8 },
-                    { source: "OAuth", target: "JWT", value: 0.7 },
-                    { source: "OpenID Connect", target: "Google Auth", value: 0.9 },
-                    { source: "OpenID Connect", target: "Microsoft Azure AD", value: 0.9 }
-                ]
-            },
-            it_layers: {
-                nodes: [
-                    { id: "Hardware", group: 5, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "CPU", group: 5, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "TPM", group: 5, extensions: "", isSecurity: true, securityDetails: "Trusted Boot, Key Storage" },
-                    { id: "Operating System", group: 6, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "Linux", group: 6, extensions: ".sh", isSecurity: true, securityDetails: "SELinux, AppArmor" },
-                    { id: "Windows", group: 6, extensions: ".bat", isSecurity: true, securityDetails: "BitLocker, Defender" },
-                    { id: "Network", group: 7, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "TCP/IP", group: 7, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "DNS", group: 7, extensions: ".conf", isSecurity: true, securityDetails: "DNSSEC" },
-                    { id: "Database", group: 3, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "PostgreSQL", group: 3, extensions: ".sql", isSecurity: true, securityDetails: "SSL, pg_hba.conf" },
-                    { id: "MongoDB", group: 3, extensions: ".json", isSecurity: true, securityDetails: "Auth, TLS" },
-                    { id: "Application", group: 2, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "Node.js", group: 2, extensions: ".js", isSecurity: false, securityDetails: "" },
-                    { id: "Django", group: 2, extensions: ".py", isSecurity: false, securityDetails: "" },
-                    { id: "Xamarin", group: 2, extensions: ".cs, .xaml", isSecurity: true, securityDetails: "Secure Storage, Auth" },
-                    { id: "OAuth", group: 10, extensions: "", isSecurity: true, securityDetails: "Access Token, Refresh Token" },
-                    { id: "Google Auth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, OAuth 2.0" },
-                    { id: "Facebook Login", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, App Secret" },
-                    { id: "Twitter OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "API Key, Bearer Token" },
-                    { id: "GitHub OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Client ID, Access Token" },
-                    { id: "LinkedIn OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, Client Secret" },
-                    { id: "OpenID Connect", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, JWT" },
-                    { id: "Microsoft Azure AD", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, Access Token" },
-                    { id: "Frontend", group: 1, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "React", group: 1, extensions: ".jsx, .tsx", isSecurity: false, securityDetails: "" },
-                    { id: "Vue", group: 1, extensions: ".vue", isSecurity: false, securityDetails: "" },
-                    { id: "Flutter", group: 1, extensions: ".dart", isSecurity: false, securityDetails: "" },
-                    { id: "Xamarin", group: 1, extensions: ".cs, .xaml", isSecurity: true, securityDetails: "Secure Storage, Auth" }
-                ],
-                links: [
-                    { source: "Hardware", target: "CPU" },
-                    { source: "Hardware", target: "TPM" },
-                    { source: "Operating System", target: "Linux" },
-                    { source: "Operating System", target: "Windows" },
-                    { source: "Network", target: "TCP/IP" },
-                    { source: "Network", target: "DNS" },
-                    { source: "Database", target: "PostgreSQL" },
-                    { source: "Database", target: "MongoDB" },
-                    { source: "Application", target: "Node.js" },
-                    { source: "Application", target: "Django" },
-                    { source: "Application", target: "Xamarin" },
-                    { source: "Application", target: "OAuth" },
-                    { source: "Application", target: "Google Auth" },
-                    { source: "Application", target: "Facebook Login" },
-                    { source: "Application", target: "Twitter OAuth" },
-                    { source: "Application", target: "GitHub OAuth" },
-                    { source: "Application", target: "LinkedIn OAuth" },
-                    { source: "Application", target: "OpenID Connect" },
-                    { source: "Application", target: "Microsoft Azure AD" },
-                    { source: "Frontend", target: "React" },
-                    { source: "Frontend", target: "Vue" },
-                    { source: "Frontend", target: "Flutter" },
-                    { source: "Frontend", target: "Xamarin" },
-                    { source: "Frontend", target: "Google Auth" },
-                    { source: "Frontend", target: "Facebook Login" },
-                    { source: "Frontend", target: "Microsoft Azure AD" },
-                    { source: "Hardware", target: "Operating System" },
-                    { source: "Operating System", target: "Network" },
-                    { source: "Network", target: "Database" },
-                    { source: "Database", target: "Application" },
-                    { source: "Application", target: "Frontend" }
-                ]
-            },
-            network_elements: {
-                nodes: [
-                    { id: "Network", group: 7, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "IP Address", group: 8, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "Private IP", group: 8, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "Public IP", group: 8, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "Subnet", group: 8, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "MAC Address", group: 8, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "TCP/IP", group: 9, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "UDP", group: 9, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "HTTP/HTTPS", group: 9, extensions: "", isSecurity: true, securityDetails: "TLS, Certificates" },
-                    { id: "DNS", group: 9, extensions: ".conf", isSecurity: true, securityDetails: "DNSSEC" },
-                    { id: "DHCP", group: 9, extensions: ".conf", isSecurity: false, securityDetails: "" },
-                    { id: "Firewall", group: 10, extensions: ".conf", isSecurity: true, securityDetails: "Rules, iptables" },
-                    { id: "Proxy", group: 10, extensions: ".conf", isSecurity: true, securityDetails: "ACLs, Authentication" },
-                    { id: "VPN", group: 10, extensions: ".ovpn", isSecurity: true, securityDetails: "IPSec, OpenVPN" },
-                    { id: "IDS/IPS", group: 10, extensions: ".conf", isSecurity: true, securityDetails: "Signatures, Alerts" },
-                    { id: "NAT", group: 10, extensions: "", isSecurity: true, securityDetails: "Port Mapping" },
-                    { id: "OAuth", group: 10, extensions: "", isSecurity: true, securityDetails: "Access Token, Refresh Token" },
-                    { id: "Google Auth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, OAuth 2.0" },
-                    { id: "Facebook Login", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, App Secret" },
-                    { id: "Twitter OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "API Key, Bearer Token" },
-                    { id: "GitHub OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Client ID, Access Token" },
-                    { id: "LinkedIn OAuth", group: 10, extensions: ".json", isSecurity: true, securityDetails: "Access Token, Client Secret" },
-                    { id: "OpenID Connect", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, JWT" },
-                    { id: "Microsoft Azure AD", group: 10, extensions: ".json", isSecurity: true, securityDetails: "ID Token, Access Token" },
-                    { id: "ISP", group: 11, extensions: "", isSecurity: false, securityDetails: "" },
-                    { id: "Router", group: 11, extensions: ".conf", isSecurity: false, securityDetails: "" },
-                    { id: "Switch", group: 11, extensions: ".conf", isSecurity: false, securityDetails: "" },
-                    { id: "Load Balancer", group: 11, extensions: ".conf", isSecurity: false, securityDetails: "" },
-                    { id: "Gateway", group: 11, extensions: ".conf", isSecurity: false, securityDetails: "" }
-                ],
-                links: [
-                    { source: "Network", target: "IP Address" },
-                    { source: "Network", target: "TCP/IP" },
-                    { source: "Network", target: "Firewall" },
-                    { source: "Network", target: "ISP" },
-                    { source: "IP Address", target: "Private IP" },
-                    { source: "IP Address", target: "Public IP" },
-                    { source: "IP Address", target: "Subnet" },
-                    { source: "IP Address", target: "MAC Address" },
-                    { source: "TCP/IP", target: "UDP" },
-                    { source: "TCP/IP", target: "HTTP/HTTPS" },
-                    { source: "TCP/IP", target: "DNS" },
-                    { source: "DNS", target: "DHCP" },
-                    { source: "HTTP/HTTPS", target: "OAuth" },
-                    { source: "HTTP/HTTPS", target: "Google Auth" },
-                    { source: "HTTP/HTTPS", target: "Facebook Login" },
-                    { source: "HTTP/HTTPS", target: "Twitter OAuth" },
-                    { source: "HTTP/HTTPS", target: "GitHub OAuth" },
-                    { source: "HTTP/HTTPS", target: "LinkedIn OAuth" },
-                    { source: "HTTP/HTTPS", target: "OpenID Connect" },
-                    { source: "HTTP/HTTPS", target: "Microsoft Azure AD" },
-                    { source: "Firewall", target: "Proxy" },
-                    { source: "Firewall", target: "VPN" },
-                    { source: "Firewall", target: "IDS/IPS" },
-                    { source: "Firewall", target: "NAT" },
-                    { source: "ISP", target: "Router" },
-                    { source: "Router", target: "Switch" },
-                    { source: "Router", target: "Load Balancer" },
-                    { source: "Router", target: "Gateway" }
-                ]
-            }
-        };
+  <!-- Hero Section -->
+  <section class="hero-bg h-96 flex items-center justify-center text-center text-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 id="hero-title" class="text-4xl sm:text-5xl font-bold child-friendly mb-4">La Petite Académie Montessori</h2>
+      <p id="hero-subtitle" class="text-lg sm:text-xl mb-6">A nurturing Montessori daycare for children aged 18 months to 5 years in Montreal, fostering independence and creativity.</p>
+      <a href="#contact" class="inline-block px-6 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">Discover Our Academy</a>
+    </div>
+  </section>
 
-        const colors = {
-            1: "#3b82f6", // Frontend
-            2: "#ef4444", // Backend/Application
-            3: "#10b981", // Database
-            4: "#f59e0b", // DevOps
-            5: "#8b5cf6", // Hardware
-            6: "#ec4899", // Operating System
-            7: "#6b7280", // Network
-            8: "#14b8a6", // Addressing
-            9: "#4f46e5", // Protocols
-            10: "#f97316", // Security
-            11: "#9ca3af"  // Infrastructure
-        };
+  <!-- About Section -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h3 id="about-title" class="text-3xl font-bold text-gray-800 child-friendly mb-6">Welcome to La Petite Académie</h3>
+      <p id="about-text" class="text-lg text-gray-600 max-w-3xl mx-auto">La Petite Académie is a Montessori daycare dedicated to fostering independence, creativity, and a love for learning in children aged 18 months to 5 years. Located in Montreal, our child-centered environment encourages exploration and growth through hands-on activities and personalized care.</p>
+    </div>
+  </section>
 
-        function ForceGraph({ data, showExtensions, showSecurity }) {
-            const ref = useRef();
-            const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+  <!-- Montessori Features Section -->
+  <section class="py-16 section-bg text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h3 id="features-title" class="text-3xl font-bold child-friendly mb-6">Our Montessori Approach</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div class="bg-white bg-opacity-90 p-6 rounded-lg shadow">
+          <h4 id="feature1-title" class="text-xl font-semibold text-yellow-500 child-friendly mb-2">Hands-On Learning</h4>
+          <p id="feature1-text" class="text-gray-600">Children engage with Montessori materials to develop critical thinking and motor skills.</p>
+        </div>
+        <div class="bg-white bg-opacity-90 p-6 rounded-lg shadow">
+          <h4 id="feature2-title" class="text-xl font-semibold text-yellow-500 child-friendly mb-2">Independence</h4>
+          <p id="feature2-text" class="text-gray-600">Our environment empowers children to make choices and build confidence.</p>
+        </div>
+        <div class="bg-white bg-opacity-90 p-6 rounded-lg shadow">
+          <h4 id="feature3-title" class="text-xl font-semibold text-yellow-500 child-friendly mb-2">Creative Play</h4>
+          <p id="feature3-text" class="text-gray-600">Art, music, and imaginative play spark creativity and joy in learning.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            useEffect(() => {
-                const updateDimensions = () => {
-                    const container = ref.current.parentElement;
-                    const padding = 40;
-                    const width = container.clientWidth - padding;
-                    const height = Math.min(window.innerHeight - 200, 600);
-                    setDimensions({ width, height });
-                };
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h3 id="contact-title" class="text-3xl font-bold text-gray-800 child-friendly mb-6">Contact Us</h3>
+      <p id="contact-address" class="text-lg text-gray-600 mb-4">3401 Rue Ontario E, Montreal, QC H1W 1R1</p>
+      <p id="contact-phone" class="text-lg text-gray-600 mb-4">Phone: (438) 926-4166</p>
+      <p id="contact-email" class="text-lg text-gray-600 mb-4">Email: lapetiteacademieinc@gmail.com</p>
+      <p id="contact-website" class="text-lg text-gray-600 mb-6">Website: <a href="http://www.lapetiteacademieinc.com" class="text-yellow-500 hover:underline">www.lapetiteacademieinc.com</a></p>
+      <a href="mailto:info@lapetiteacademieinc.com" class="inline-block px-6 py-3 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">Send Us a Message</a>
+    </div>
+  </section>
 
-                updateDimensions();
-                window.addEventListener('resize', updateDimensions);
-                return () => window.removeEventListener('resize', updateDimensions);
-            }, []);
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p id="footer-text" class="text-sm">© 2025 La Petite Académie. All rights reserved.</p>
+    </div>
+  </footer>
 
-            useEffect(() => {
-                const { width, height } = dimensions;
-                const padding = 40;
+  <script>
+    const translations = {
+      en: {
+        'hero-title': 'La Petite Académie Montessori',
+        'hero-subtitle': 'A nurturing Montessori daycare for children aged 18 months to 5 years in Montreal, fostering independence and creativity.',
+        'about-title': 'Welcome to La Petite Académie',
+        'about-text': 'La Petite Académie is a Montessori daycare dedicated to fostering independence, creativity, and a love for learning in children aged 18 months to 5 years. Located in Montreal, our child-centered environment encourages exploration and growth through hands-on activities and personalized care.',
+        'features-title': 'Our Montessori Approach',
+        'feature1-title': 'Hands-On Learning',
+        'feature1-text': 'Children engage with Montessori materials to develop critical thinking and motor skills.',
+        'feature2-title': 'Independence',
+        'feature2-text': 'Our environment empowers children to make choices and build confidence.',
+        'feature3-title': 'Creative Play',
+        'feature3-text': 'Art, music, and imaginative play spark creativity and joy in learning.',
+        'contact-title': 'Contact Us',
+        'contact-address': '3401 Rue Ontario E, Montreal, QC H1W 1R1',
+        'contact-phone': 'Phone: (514) 123-4567',
+        'contact-email': 'Email: info@lapetiteacademieinc.com',
+        'contact-website': 'Website: <a href="http://www.lapetiteacademieinc.com" class="text-yellow-500 hover:underline">www.lapetiteacademieinc.com</a>',
+        'footer-text': '© 2025 La Petite Académie. All rights reserved.'
+      },
+      fr: {
+        'hero-title': 'La Petite Académie Montessori',
+        'hero-subtitle': 'Une garderie Montessori aimante pour les enfants de 18 mois à 5 ans à Montréal, favorisant l’indépendance et la créativité.',
+        'about-title': 'Bienvenue à La Petite Académie',
+        'about-text': 'La Petite Académie est une garderie Montessori dédiée à promouvoir l’indépendance, la créativité et l’amour de l’apprentissage chez les enfants de 18 mois à 5 ans. Située à Montréal, notre environnement centré sur l’enfant encourage l’exploration et la croissance à travers des activités pratiques et des soins personnalisés.',
+        'features-title': 'Notre approche Montessori',
+        'feature1-title': 'Apprentissage pratique',
+        'feature1-text': 'Les enfants interagissent avec des matériels Montessori pour développer leur pensée critique et leurs compétences motrices.',
+        'feature2-title': 'Indépendance',
+        'feature2-text': 'Notre environnement permet aux enfants de faire des choix et de gagner en confiance.',
+        'feature3-title': 'Jeu créatif',
+        'feature3-text': 'L’art, la musique et le jeu imaginatif éveillent la créativité et la joie d’apprendre.',
+        'contact-title': 'Contactez-nous',
+        'contact-address': '3401 Rue Ontario E, Montréal, QC H1W 1R1',
+        'contact-phone': 'Téléphone : (514) 123-4567',
+        'contact-email': 'Courriel : info@lapetiteacademieinc.com',
+        'contact-website': 'Site web : <a href="http://www.lapetiteacademieinc.com" class="text-yellow-500 hover:underline">www.lapetiteacademieinc.com</a>',
+        'footer-text': '© 2025 La Petite Académie. Tous droits réservés.'
+      }
+    };
 
-                // Filter nodes and links based on showSecurity
-                const filteredNodes = showSecurity
-                    ? data.nodes.filter(node => node.isSecurity)
-                    : data.nodes;
-                const filteredNodeIds = new Set(filteredNodes.map(node => node.id));
-                const filteredLinks = showSecurity
-                    ? data.links.filter(link => {
-                        const sourceId = typeof link.source === 'string' ? link.source : link.source.id;
-                        const targetId = typeof link.target === 'string' ? link.target : link.target.id;
-                        return filteredNodeIds.has(sourceId) && filteredNodeIds.has(targetId);
-                    })
-                    : data.links;
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      Object.keys(translations[lang]).forEach(id => {
+        document.getElementById(id).innerHTML = translations[lang][id];
+      });
+      document.getElementById('lang-en').classList.toggle('bg-yellow-500', lang === 'en');
+      document.getElementById('lang-en').classList.toggle('text-white', lang === 'en');
+      document.getElementById('lang-en').classList.toggle('bg-gray-200', lang !== 'en');
+      document.getElementById('lang-en').classList.toggle('text-gray-800', lang !== 'en');
+      document.getElementById('lang-fr').classList.toggle('bg-yellow-500', lang === 'fr');
+      document.getElementById('lang-fr').classList.toggle('text-white', lang === 'fr');
+      document.getElementById('lang-fr').classList.toggle('bg-gray-200', lang !== 'fr');
+      document.getElementById('lang-fr').classList.toggle('text-gray-800', lang !== 'fr');
+    }
 
-                const svg = d3.select("#graph")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .attr("viewBox", `0 0 ${width} ${height}`);
+    document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+    document.getElementById('lang-fr').addEventListener('click', () => setLanguage('fr'));
 
-                svg.selectAll("*").remove();
-
-                const simulation = d3.forceSimulation(filteredNodes)
-                    .force("link", d3.forceLink(filteredLinks).id(d => d.id).distance(100))
-                    .force("charge", d3.forceManyBody().strength(-400))
-                    .force("center", d3.forceCenter(width / 2, height / 2))
-                    .force("collide", d3.forceCollide().radius(30))
-                    .force("x", d3.forceX().strength(0.1))
-                    .force("y", d3.forceY().strength(0.1));
-
-                const link = svg.append("g")
-                    .attr("class", "link")
-                    .selectAll("line")
-                    .data(filteredLinks)
-                    .enter().append("line")
-                    .attr("stroke-width", d => d.value ? Math.sqrt(d.value) * 5 : 2);
-
-                const node = svg.append("g")
-                    .selectAll("circle")
-                    .data(filteredNodes)
-                    .enter().append("circle")
-                    .attr("class", "node")
-                    .attr("r", 10)
-                    .attr("fill", d => colors[d.group])
-                    .call(d3.drag()
-                        .on("start", dragstarted)
-                        .on("drag", dragged)
-                        .on("end", dragended));
-
-                const text = svg.append("g")
-                    .selectAll("text")
-                    .data(filteredNodes)
-                    .enter().append("text")
-                    .attr("x", 14)
-                    .attr("y", 3)
-                    .text(d => {
-                        let label = d.id;
-                        const details = [];
-                        if (showExtensions && d.extensions) details.push(d.extensions);
-                        if (showSecurity && d.securityDetails) details.push(d.securityDetails);
-                        if (details.length > 0) label += ` (${details.join(', ')})`;
-                        return label;
-                    })
-                    .attr("font-size", "11px");
-
-                simulation.on("tick", () => {
-                    link
-                        .attr("x1", d => d.source.x)
-                        .attr("y1", d => d.source.y)
-                        .attr("x2", d => d.target.x)
-                        .attr("y2", d => d.target.y);
-
-                    node
-                        .attr("cx", d => Math.max(padding, Math.min(width - padding, d.x)))
-                        .attr("cy", d => Math.max(padding, Math.min(height - padding, d.y)));
-
-                    text
-                        .attr("x", d => Math.max(padding, Math.min(width - padding, d.x)) + 14)
-                        .attr("y", d => Math.max(padding, Math.min(height - padding, d.y)) + 3);
-                });
-
-                function dragstarted(event, d) {
-                    if (!event.active) simulation.alphaTarget(0.3).restart();
-                    d.fx = d.x;
-                    d.fy = d.y;
-                }
-
-                function dragged(event, d) {
-                    d.fx = Math.max(padding, Math.min(width - padding, event.x));
-                    d.fy = Math.max(padding, Math.min(height - padding, event.y));
-                }
-
-                function dragended(event, d) {
-                    if (!event.active) simulation.alphaTarget(0);
-                    d.fx = null;
-                    d.fy = null;
-                }
-
-                // Restart simulation to stabilize after filtering
-                simulation.alpha(1).restart();
-
-                return () => simulation.stop();
-            }, [data, dimensions, showExtensions, showSecurity]);
-
-            return <div ref={ref}><svg id="graph"></svg></div>;
-        }
-
-        function App() {
-            const [activeTab, setActiveTab] = useState("stacks");
-            const [showExtensions, setShowExtensions] = useState(false);
-            const [showSecurity, setShowSecurity] = useState(false);
-
-            const tabContent = {
-                stacks: {
-                    data: techData.stacks,
-                    title: "Technology Stacks",
-                    description: "Visualizing common web development stacks and their relationships"
-                },
-                categories: {
-                    data: techData.categories,
-                    title: "Technology Categories",
-                    description: "Organizing web technologies by their primary categories"
-                },
-                comparisons: {
-                    data: techData.comparisons,
-                    title: "Technology Comparisons",
-                    description: "Comparing similar technologies within the same domain"
-                },
-                it_layers: {
-                    data: techData.it_layers,
-                    title: "IT Layers",
-                    description: "Visualizing the full spectrum of IT layers from hardware to frontend presentation"
-                },
-                network_elements: {
-                    data: techData.network_elements,
-                    title: "Network Elements",
-                    description: "Visualizing network-related components and terminologies"
-                }
-            };
-
-            return (
-                <div className="min-h-screen bg-gray-100 p-4">
-                    <div className="max-w-7xl mx-auto">
-                        <h1 className="text-3xl font-bold text-center mb-6">Web Development Technology Landscape</h1>
-                        <div className="flex justify-center mb-4">
-                            {Object.keys(tabContent).map(tab => (
-                                <button
-                                    key={tab}
-                                    className={`px-4 py-2 mx-2 rounded tab ${activeTab === tab ? 'bg-blue-500 text-white' : 'bg-white'}`}
-                                    onClick={() => setActiveTab(tab)}
-                                >
-                                    {tabContent[tab].title}
-                                </button>
-                            ))}
-                        </div>
-                        <div className="bg-white p-6 rounded-lg shadow-lg">
-                            <h2 className="text-xl font-semibold mb-2">{tabContent[activeTab].title}</h2>
-                            <p className="text-gray-600 mb-4">{tabContent[activeTab].description}</p>
-                            <div className="flex space-x-4 mb-4">
-                                <label className="flex items-center">
-                                    <input
-                                        type="checkbox"
-                                        checked={showExtensions}
-                                        onChange={() => setShowExtensions(!showExtensions)}
-                                        className="mr-2"
-                                    />
-                                    Show File Extensions
-                                </label>
-                                <label className="flex items-center">
-                                    <input
-                                        type="checkbox"
-                                        checked={showSecurity}
-                                        onChange={() => setShowSecurity(!showSecurity)}
-                                        className="mr-2"
-                                    />
-                                    Show Security Artifacts
-                                </label>
-                            </div>
-                            <div className="w-full h-[600px]">
-                                <ForceGraph
-                                    data={tabContent[activeTab].data}
-                                    showExtensions={showExtensions}
-                                    showSecurity={showSecurity}
-                                />
-                            </div>
-                        </div>
-                        <div className="mt-6 text-sm text-gray-600">
-                            <p><strong>Legend:</strong></p>
-                            <p><span className="inline-block w-3 h-3 bg-blue-500 mr-2"></span>Frontend</p>
-                            <p><span className="inline-block w-3 h-3 bg-red-500 mr-2"></span>Backend/Application</p>
-                            <p><span className="inline-block w-3 h-3 bg-green-500 mr-2"></span>Database</p>
-                            <p><span className="inline-block w-3 h-3 bg-yellow-500 mr-2"></span>DevOps</p>
-                            <p><span className="inline-block w-3 h-3 bg-purple-500 mr-2"></span>Hardware</p>
-                            <p><span className="inline-block w-3 h-3 bg-pink-500 mr-2"></span>Operating System</p>
-                            <p><span className="inline-block w-3 h-3 bg-gray-500 mr-2"></span>Network</p>
-                            <p><span className="inline-block w-3 h-3 bg-teal-500 mr-2"></span>Addressing</p>
-                            <p><span className="inline-block w-3 h-3 bg-indigo-500 mr-2"></span>Protocols</p>
-                            <p><span className="inline-block w-3 h-3 bg-orange-500 mr-2"></span>Security</p>
-                            <p><span className="inline-block w-3 h-3 bg-gray-400 mr-2"></span>Infrastructure</p>
-                            <p><strong>Note:</strong> Enable 'Show Security Artifacts' to filter for security-related technologies (e.g., OAuth, Google Auth, Facebook Login) and show their security details in brackets.</p>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
+    // Set default language to English
+    setLanguage('en');
+  </script>
 </body>
 </html>
