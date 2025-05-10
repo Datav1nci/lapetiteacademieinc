@@ -44,11 +44,17 @@ msgstr "Educational Program"
 msgid "Engaging activities to foster creativity and learning for young children."
 msgstr "Engaging activities to foster creativity and learning for young children."
 
+msgid "A comprehensive curriculum designed to stimulate cognitive, social, and emotional development through hands-on activities, storytelling, and music."
+msgstr "A comprehensive curriculum designed to stimulate cognitive, social, and emotional development through hands-on activities, storytelling, and music."
+
 msgid "Safe Environment"
 msgstr "Safe Environment"
 
 msgid "A secure and welcoming space for children to thrive."
 msgstr "A secure and welcoming space for children to thrive."
+
+msgid "Our facility is equipped with state-of-the-art safety features, including secure entry systems, child-proofed spaces, and constant supervision by trained staff."
+msgstr "Our facility is equipped with state-of-the-art safety features, including secure entry systems, child-proofed spaces, and constant supervision by trained staff."
 
 msgid "Nutritious Meals"
 msgstr "Nutritious Meals"
@@ -56,11 +62,17 @@ msgstr "Nutritious Meals"
 msgid "Healthy and balanced menus tailored to young children’s needs."
 msgstr "Healthy and balanced menus tailored to young children’s needs."
 
+msgid "Meals are prepared daily by nutritionists, using fresh, organic ingredients to meet dietary needs and promote healthy eating habits."
+msgstr "Meals are prepared daily by nutritionists, using fresh, organic ingredients to meet dietary needs and promote healthy eating habits."
+
 msgid "Daily Park Outings"
 msgstr "Daily Park Outings"
 
 msgid "Daily walks and outdoor play to encourage physical activity."
 msgstr "Daily walks and outdoor play to encourage physical activity."
+
+msgid "Supervised outings to local parks provide opportunities for physical exercise, nature exploration, and social interaction in a safe environment."
+msgstr "Supervised outings to local parks provide opportunities for physical exercise, nature exploration, and social interaction in a safe environment."
 
 msgid "Children’s Shows"
 msgstr "Children’s Shows"
@@ -68,11 +80,17 @@ msgstr "Children’s Shows"
 msgid "Fun and educational performances to spark children’s imagination."
 msgstr "Fun and educational performances to spark children’s imagination."
 
+msgid "Interactive performances by professional entertainers introduce children to theater, music, and storytelling, fostering creativity and confidence."
+msgstr "Interactive performances by professional entertainers introduce children to theater, music, and storytelling, fostering creativity and confidence."
+
 msgid "Creative Workshops"
 msgstr "Creative Workshops"
 
 msgid "Art and craft activities to develop fine motor skills and creativity."
 msgstr "Art and craft activities to develop fine motor skills and creativity."
+
+msgid "Hands-on art and craft sessions encourage self-expression and skill development, using safe, age-appropriate materials."
+msgstr "Hands-on art and craft sessions encourage self-expression and skill development, using safe, age-appropriate materials."
 
 msgid "Phone"
 msgstr "Phone"

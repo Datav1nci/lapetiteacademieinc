@@ -33,7 +33,7 @@ msgid "A warm and educational daycare for children 18 months and older in Hochel
 msgstr "Une garderie chaleureuse et éducative pour les enfants de 18 mois et plus à Hochelaga, Montréal."
 
 msgid "Contact Us"
-msgstr "Contactez-nous"
+strcmp: "Contactez-nous"
 
 msgid "Our Services"
 msgstr "Nos Services"
@@ -44,11 +44,17 @@ msgstr "Programme Éducatif"
 msgid "Engaging activities to foster creativity and learning for young children."
 msgstr "Activités stimulantes pour développer la créativité et l’apprentissage des tout-petits."
 
+msgid "A comprehensive curriculum designed to stimulate cognitive, social, and emotional development through hands-on activities, storytelling, and music."
+msgstr "Un programme complet conçu pour stimuler le développement cognitif, social et émotionnel par des activités pratiques, des contes et de la musique."
+
 msgid "Safe Environment"
 msgstr "Environnement Sûr"
 
 msgid "A secure and welcoming space for children to thrive."
 msgstr "Un espace sécurisé et accueillant pour que les enfants s’épanouissent."
+
+msgid "Our facility is equipped with state-of-the-art safety features, including secure entry systems, child-proofed spaces, and constant supervision by trained staff."
+msgstr "Notre établissement est équipé de dispositifs de sécurité de pointe, y compris des systèmes d’entrée sécurisés, des espaces adaptés aux enfants et une supervision constante par un personnel formé."
 
 msgid "Nutritious Meals"
 msgstr "Repas Nutritifs"
@@ -56,11 +62,17 @@ msgstr "Repas Nutritifs"
 msgid "Healthy and balanced menus tailored to young children’s needs."
 msgstr "Menus sains et équilibrés adaptés aux besoins des jeunes enfants."
 
+msgid "Meals are prepared daily by nutritionists, using fresh, organic ingredients to meet dietary needs and promote healthy eating habits."
+msgstr "Les repas sont préparés quotidiennement par des nutritionnistes, utilisant des ingrédients frais et biologiques pour répondre aux besoins alimentaires et promouvoir des habitudes alimentaires saines."
+
 msgid "Daily Park Outings"
 msgstr "Sorties au Parc Quotidiennes"
 
 msgid "Daily walks and outdoor play to encourage physical activity."
 msgstr "Promenades et jeux en plein air chaque jour pour encourager l’activité physique."
+
+msgid "Supervised outings to local parks provide opportunities for physical exercise, nature exploration, and social interaction in a safe environment."
+msgstr "Des sorties supervisées dans les parcs locaux offrent des opportunités pour l’exercice physique, l’exploration de la nature et l’interaction sociale dans un environnement sécurisé."
 
 msgid "Children’s Shows"
 msgstr "Spectacles pour Enfants"
@@ -68,11 +80,17 @@ msgstr "Spectacles pour Enfants"
 msgid "Fun and educational performances to spark children’s imagination."
 msgstr "Présentations ludiques et éducatives pour stimuler l’imagination des enfants."
 
+msgid "Interactive performances by professional entertainers introduce children to theater, music, and storytelling, fostering creativity and confidence."
+msgstr "Des spectacles interactifs par des artistes professionnels initient les enfants au théâtre, à la musique et aux contes, favorisant la créativité et la confiance."
+
 msgid "Creative Workshops"
 msgstr "Ateliers Créatifs"
 
 msgid "Art and craft activities to develop fine motor skills and creativity."
 msgstr "Activités artistiques et manuelles pour développer la motricité fine et la créativité."
+
+msgid "Hands-on art and craft sessions encourage self-expression and skill development, using safe, age-appropriate materials."
+msgstr "Des sessions d’art et d’artisanat pratiques encouragent l’expression de soi et le développement des compétences, en utilisant des matériaux sûrs et adaptés à l’âge."
 
 msgid "Phone"
 msgstr "Téléphone"
