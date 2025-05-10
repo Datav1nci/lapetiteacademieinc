@@ -1,191 +1,141 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{% get_current_language %}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="La Petite Académie, a Montessori daycare in Montreal, nurturing children aged 18 months to 5 years with a child-centered approach.">
-  <meta name="keywords" content="Montessori, daycare, Montreal, childcare, preschool, early childhood">
-  <meta name="author" content="La Petite Académie">
-  <title>La Petite Académie - Montessori Daycare in Montreal</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Comic Neue', cursive; background-color: #f0f9ff; }
-    .hero-bg { 
-      background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-      url('https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); 
-      background-size: cover; 
-      background-position: center; 
-    }
-    .language-toggle { 
-      transition: all 0.3s ease; 
-      border: 2px solid #f97316; 
-      border-radius: 20px; 
-    }
-    .language-toggle:hover { 
-      transform: scale(1.05); 
-      background-color: #fef08a; 
-    }
-    .child-friendly { 
-      color: #ef4444; 
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
-    }
-    .section-bg { 
-      background: url('https://images.unsplash.com/photo-1579202673506-ca3ce28943ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') 
-      no-repeat center center; 
-      background-size: cover; 
-    }
-    .card-bg { 
-      background: rgba(255, 255, 255, 0.9); 
-      border: 3px solid #3b82f6; 
-      border-radius: 15px; 
-    }
-    .btn-primary { 
-      background-color: #f97316; 
-      border: 2px solid #d97706; 
-      border-radius: 20px; 
-      padding: 0.75rem 1.5rem; 
-      font-size: 1.125rem; 
-      transition: all 0.3s ease; 
-    }
-    .btn-primary:hover { 
-      background-color: #fef08a; 
-      color: #b91c1c; 
-      transform: scale(1.05); 
-    }
-  </style>
+  <meta name="description" content="{% trans 'La petite Académie is a premier daycare offering bilingual programs, safe environment, and nutritious meals for children aged 18 months to 5 years in Montreal’s Hochelaga neighbourhood.' %}">
+  <title>{% trans "La petite Académie" %}</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^3/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <!-- Header -->
-  <header class="bg-yellow-200 shadow sticky top-0 z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-red-500 child-friendly">La Petite Académie</h1>
-      <div class="flex space-x-4">
-        <button id="lang-en" class="language-toggle px-4 py-2 bg-yellow-400 text-red-600 font-bold rounded-full hover:bg-yellow-300 focus:outline-none">English</button>
-        <button id="lang-fr" class="language-toggle px-4 py-2 bg-blue-200 text-blue-800 font-bold rounded-full hover:bg-blue-300 focus:outline-none">Français</button>
+<body class="font-sans antialiased">
+
+  <header class="bg-white shadow">
+    <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-2xl font-bold">{% trans "La petite Académie" %}</a>
+      <div class="flex space-x-2">
+        <button @click="window.location.search='?lang=fr'" class="px-3 py-1 border rounded hover:bg-gray-100 transition">
+          {% trans "Français" %}
+        </button>
+        <button @click="window.location.search='?lang=en'" class="px-3 py-1 border rounded hover:bg-gray-100 transition">
+          {% trans "English" %}
+        </button>
       </div>
-    </div>
+    </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero-bg h-96 flex items-center justify-center text-center text-white">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 id="hero-title" class="text-4xl sm:text-5xl font-bold child-friendly mb-4">La Petite Académie Montessori</h2>
-      <p id="hero-subtitle" class="text-lg sm:text-xl mb-6">A joyful Montessori daycare for kids aged 18 months to 5 years in Montreal, sparking creativity and fun!</p>
-      <a href="#contact" class="btn-primary text-white font-bold">Explore Our Academy</a>
+  <section class="relative bg-cover bg-center h-screen" style="background-image: url('https://via.placeholder.com/1600x600?text=Hero+Image')">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white px-4">
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-4">
+        {% trans "Bienvenue à La petite Académie" %}
+      </h1>
+      <p class="text-lg md:text-2xl mb-6">
+        {% trans "A nurturing environment for children aged 18 months to 5 years." %}
+      </p>
+      <a href="#contact" class="bg-yellow-400 text-black px-6 py-3 rounded-full text-lg font-semibold hover:bg-yellow-500 transition">
+        {% trans "Book a Tour" %}
+      </a>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section class="py-16 bg-blue-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h3 id="about-title" class="text-3xl font-bold text-red-500 child-friendly mb-6">Welcome to La Petite Académie</h3>
-      <p id="about-text" class="text-lg text-blue-700 max-w-3xl mx-auto">La Petite Académie is a happy Montessori daycare where kids aged 18 months to 5 years learn, play, and grow! In Montreal, our fun and colorful space helps children explore, create, and build confidence with caring teachers.</p>
-    </div>
-  </section>
+  <main class="container mx-auto px-4 py-12 space-y-20">
 
-  <!-- Montessori Features Section -->
-  <section class="py-16 section-bg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h3 id="features-title" class="text-3xl font-bold text-red-500 child-friendly mb-6">Our Montessori Magic</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-        <div class="card-bg p-6 rounded-lg shadow">
-          <h4 id="feature1-title" class="text-xl font-bold text-orange-500 child-friendly mb-2">Fun Learning</h4>
-          <p id="feature1-text" class="text-blue-700">Kids play with cool Montessori toys to learn and grow smart!</p>
+    <section id="about" class="text-center">
+      <h2 class="text-3xl font-bold mb-4">{% trans "About Us" %}</h2>
+      <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+        {% trans "At La petite Académie, we provide a safe, bilingual, and stimulating environment for your child’s growth and development." %}
+      </p>
+    </section>
+
+    <section id="programs">
+      <h2 class="text-3xl font-bold text-center mb-8">{% trans "Our Programs" %}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Safe Environment Card -->
+        <div class="bg-white shadow rounded-lg p-6 text-center">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
+            <!-- Safe Environment Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">{% trans "Safe Environment" %}</h3>
+          <p class="text-gray-600">
+            {% trans "Our facilities are designed to ensure the safety and comfort of every child." %}
+          </p>
         </div>
-        <div class="card-bg p-6 rounded-lg shadow">
-          <h4 id="feature2-title" class="text-xl font-bold text-orange-500 child-friendly mb-2">Be Yourself</h4>
-          <p id="feature2-text" class="text-blue-700">Our space lets kids choose and feel super confident!</p>
+        <!-- Bilingual Staff Card -->
+        <div class="bg-white shadow rounded-lg p-6 text-center">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
+            <!-- Bilingual Staff Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">{% trans "Bilingual Staff" %}</h3>
+          <p class="text-gray-600">
+            {% trans "Our team speaks both English and French to support your child’s learning journey." %}
+          </p>
         </div>
-        <div class="card-bg p-6 rounded-lg shadow">
-          <h4 id="feature3-title" class="text-xl font-bold text-orange-500 child-friendly mb-2">Creative Fun</h4>
-          <p id="feature3-text" class="text-blue-700">Painting, singing, and pretending make every day exciting!</p>
+        <!-- Nutritious Meals Card -->
+        <div class="bg-white shadow rounded-lg p-6 text-center">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+            <!-- Nutritious Meals Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">{% trans "Nutritious Meals" %}</h3>
+          <p class="text-gray-600">
+            {% trans "Healthy and balanced meals prepared daily for growing bodies." %}
+          </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-16 bg-yellow-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h3 id="contact-title" class="text-3xl font-bold text-red-500 child-friendly mb-6">Come Say Hi!</h3>
-      <p id="contact-address" class="text-lg text-blue-700 mb-4">3401 Rue Ontario E, Montreal, QC H1W 1R1</p>
-      <p id="contact-phone" class="text-lg text-blue-700 mb-4">Phone: (438) 926-4166</p>
-      <p id="contact-email" class="text-lg text-blue-700 mb-4">Email: lapetiteacademieinc@gmail.com</p>
-      <p id="contact-website" class="text-lg text-blue-700 mb-6">Website: <a href="http://www.lapetiteacademieinc.com" class="text-orange-500 hover:underline">www.lapetiteacademieinc.com</a></p>
-      <a href="mailto:info@lapetiteacademieinc.com" class="btn-primary text-white font-bold">Send a Happy Message</a>
-    </div>
-  </section>
+    <section id="contact" class="max-w-xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-4">{% trans "Contact" %}</h2>
+      <p class="text-center text-gray-700 mb-6">
+        {% trans "3401 Rue Ontario E, Montreal, QC H1W 1R1" %}
+      </p>
+      <form action="#" method="post" class="space-y-4">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="{% trans "Your Name" %}" class="w-full border rounded px-4 py-2" />
+        <input type="email" name="email" placeholder="{% trans "Your Email" %}" class="w-full border rounded px-4 py-2" />
+        <textarea name="message" rows="4" placeholder="{% trans "Your Message" %}" class="w-full border rounded px-4 py-2"></textarea>
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded font-semibold hover:bg-blue-700 transition">
+          {% trans "Send Message" %}
+        </button>
+      </form>
+    </section>
 
-  <!-- Footer -->
-  <footer class="bg-blue-600 text-white py-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p id="footer-text" class="text-sm">© 2025 La Petite Académie. All rights reserved.</p>
+  </main>
+
+  <footer class="bg-gray-800 text-gray-200 py-6">
+    <div class="container mx-auto px-4 text-center space-y-4">
+      <p>{% trans "3401 Rue Ontario E, Montreal, QC H1W 1R1" %}</p>
+      <div class="flex justify-center space-x-6">
+        <a href="#" aria-label="{% trans "Facebook" %}" class="hover:text-white">
+          <!-- Facebook Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4H15c-1.2 0-1.6.8-1.6 1.6V12H18l-.5 3h-3v7A10 10 0 0022 12z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="{% trans "Instagram" %}" class="hover:text-white">
+          <!-- Instagram Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3h10zm-5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.8-1.2a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z"/>
+          </svg>
+        </a>
+        <a href="#" aria-label="{% trans "Twitter" %}" class="hover:text-white">
+          <!-- Twitter Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M22.46 6c-.77.35-1.5.58-2.27.69a4 4 0 001.72-2.21 8.1 8.1 0 01-2.6 1 4 4 0 00-6.82 3.6 11.3 11.3 0 01-8.22-4.17 4 4 0 001.24 5.32 4 4 0 01-1.82-.5v.05a4 4 0 003.2 3.9 4 4 0 01-1.8.07 4 4 0 003.75 2.8A8.1 8.1 0 012 19.54a11.4 11.4 0 006.29 1.84c7.55 0 11.67-6.25 11.67-11.67 0-.18 0-.36-.01-.54A8.4 8.4 0 0022.46 6z"/>
+          </svg>
+        </a>
+      </div>
     </div>
   </footer>
 
-  <script>
-    const translations = {
-      en: {
-        'hero-title': 'La Petite Académie Montessori',
-        'hero-subtitle': 'A joyful Montessori daycare for kids aged 18 months to 5 years in Montreal, sparking creativity and fun!',
-        'about-title': 'Welcome to La Petite Académie',
-        'about-text': 'La Petite Académie is a happy Montessori daycare where kids aged 18 months to 5 years learn, play, and grow! In Montreal, our fun and colorful space helps children explore, create, and build confidence with caring teachers.',
-        'features-title': 'Our Montessori Magic',
-        'feature1-title': 'Fun Learning',
-        'feature1-text': 'Kids play with cool Montessori toys to learn and grow smart!',
-        'feature2-title': 'Be Yourself',
-        'feature2-text': 'Our space lets kids choose and feel super confident!',
-        'feature3-title': 'Creative Fun',
-        'feature3-text': 'Painting, singing, and pretending make every day exciting!',
-        'contact-title': 'Come Say Hi!',
-        'contact-address': '3401 Rue Ontario E, Montreal, QC H1W 1R1',
-        'contact-phone': 'Phone: (514) 123-4567',
-        'contact-email': 'Email: info@lapetiteacademieinc.com',
-        'contact-website': 'Website: <a href="http://www.lapetiteacademieinc.com" class="text-orange-500 hover:underline">www.lapetiteacademieinc.com</a>',
-        'footer-text': '© 2025 La Petite Académie. All rights reserved.'
-      },
-      fr: {
-        'hero-title': 'La Petite Académie Montessori',
-        'hero-subtitle': 'Une garderie Montessori joyeuse pour les enfants de 18 mois à 5 ans à Montréal, stimulant la créativité et le plaisir !',
-        'about-title': 'Bienvenue à La Petite Académie',
-        'about-text': 'La Petite Académie est une garderie Montessori heureuse où les enfants de 18 mois à 5 ans apprennent, jouent et grandissent ! À Montréal, notre espace amusant et coloré aide les enfants à explorer, créer et gagner en confiance avec des enseignants attentionnés.',
-        'features-title': 'Notre magie Montessori',
-        'feature1-title': 'Apprentissage amusant',
-        'feature1-text': 'Les enfants jouent avec des jouets Montessori géniaux pour apprendre et devenir intelligents !',
-        'feature2-title': 'Sois toi-même',
-        'feature2-text': 'Notre espace permet aux enfants de choisir et de se sentir super confiants !',
-        'feature3-title': 'Plaisir créatif',
-        'feature3-text': 'Peindre, chanter et imaginer rendent chaque jour excitant !',
-        'contact-title': 'Viens dire bonjour !',
-        'contact-address': '3401 Rue Ontario E, Montréal, QC H1W 1R1',
-        'contact-phone': 'Téléphone : (514) 123-4567',
-        'contact-email': 'Courriel : info@lapetiteacademieinc.com',
-        'contact-website': 'Site web : <a href="http://www.lapetiteacademieinc.com" class="text-orange-500 hover:underline">www.lapetiteacademieinc.com</a>',
-        'footer-text': '© 2025 La Petite Académie. Tous droits réservés.'
-      }
-    };
-
-    function setLanguage(lang) {
-      document.documentElement.lang = lang;
-      Object.keys(translations[lang]).forEach(id => {
-        document.getElementById(id).innerHTML = translations[lang][id];
-      });
-      document.getElementById('lang-en').classList.toggle('bg-yellow-400', lang === 'en');
-      document.getElementById('lang-en').classList.toggle('text-red-600', lang === 'en');
-      document.getElementById('lang-en').classList.toggle('bg-blue-200', lang !== 'en');
-      document.getElementById('lang-en').classList.toggle('text-blue-800', lang !== 'en');
-      document.getElementById('lang-fr').classList.toggle('bg-yellow-400', lang === 'fr');
-      document.getElementById('lang-fr').classList.toggle('text-red-600', lang === 'fr');
-      document.getElementById('lang-fr').classList.toggle('bg-blue-200', lang !== 'fr');
-      document.getElementById('lang-fr').classList.toggle('text-blue-800', lang !== 'fr');
-    }
-
-    document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
-    document.getElementById('lang-fr').addEventListener('click', () => setLanguage('fr'));
-
-    // Set default language to English
-    setLanguage('en');
-  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
