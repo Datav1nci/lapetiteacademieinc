@@ -1,83 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>La petite Académie</title>
-  <link href="{% static 'css/tailwind.css' %}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Petite Académie - Garderie à Hochelaga, Montréal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Language toggle logic
+        function toggleLanguage() {
+            const frElements = document.querySelectorAll('[lang="fr"]');
+            const enElements = document.querySelectorAll('[lang="en"]');
+            const isFrench = frElements[0].style.display !== 'none';
+            
+            frElements.forEach(el => el.style.display = isFrench ? 'none' : 'block');
+            enElements.forEach(el => el.style.display = isFrench ? 'block' : 'none');
+            document.querySelector('#lang-toggle').textContent = isFrench ? 'Français' : 'English';
+        }
+    </script>
 </head>
-<body class="bg-gradient-to-r from-pink-50 via-yellow-50 to-green-50">
-  <!-- Navbar -->
-  <nav class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-    <div class="text-2xl font-bold text-pink-600">La petite Académie</div>
-    <div class="space-x-6">
-      <a href="#about" class="text-gray-700 hover:text-gray-900">About</a>
-      <a href="#programs" class="text-gray-700 hover:text-gray-900">Programs</a>
-      <a href="#gallery" class="text-gray-700 hover:text-gray-900">Gallery</a>
-      <a href="#contact" class="text-gray-700 hover:text-gray-900">Contact</a>
-    </div>
-  </nav>
+<body class="bg-gradient-to-br from-blue-50 to-pink-50 font-sans">
+    <!-- Header -->
+    <header class="bg-blue-600 text-white py-4 sticky top-0 z-10 shadow-md">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">La Petite Académie</h1>
+            <nav class="flex items-center space-x-4">
+                <a href="#accueil" class="hover:underline">Accueil</a>
+                <a href="#services" class="hover:underline">Services</a>
+                <a href="#contact" class="hover:underline">Contact</a>
+                <button id="lang-toggle" onclick="toggleLanguage()" class="bg-white text-blue-600 px-3 py-1 rounded-full hover:bg-gray-100">English</button>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Hero -->
-  <header class="text-center py-20">
-    <h1 class="text-5xl font-extrabold text-pink-500 mb-4">Bienvenue à La petite Académie</h1>
-    <p class="text-xl text-gray-700 mb-8">3401 Rue Ontario E, Montréal, QC H1W 1R1</p>
-    <a href="#contact" class="px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition animate-bounce">Planifier une visite</a>
-  </header>
+    <!-- Hero Section -->
+    <section id="accueil" class="py-20 text-center bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c')">
+        <div class="container mx-auto px-4">
+            <div lang="fr" class="bg-white bg-opacity-80 p-8 rounded-lg inline-block">
+                <h2 class="text-4xl font-extrabold text-blue-600 mb-4">Bienvenue à La Petite Académie</h2>
+                <p class="text-lg text-gray-700 mb-6">Une garderie chaleureuse et éducative pour les enfants de 18 mois et plus à Hochelaga, Montréal.</p>
+                <a href="#contact" class="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600">Contactez-nous</a>
+            </div>
+            <div lang="en" class="bg-white bg-opacity-80 p-8 rounded-lg inline-block hidden">
+                <h2 class="text-4xl font-extrabold text-blue-600 mb-4">Welcome to La Petite Académie</h2>
+                <p class="text-lg text-gray-700 mb-6">A warm and educational daycare for children 18 months and older in Hochelaga, Montreal.</p>
+                <a href="#contact" class="bg-pink-500 text-white px-6 py-3 rounded-full hover:bg-pink-600">Contact Us</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- About -->
-  <section id="about" class="max-w-4xl mx-auto px-4 py-16">
-    <h2 class="text-3xl font-bold text-gray-800 mb-4">Notre Mission</h2>
-    <p class="text-gray-600 leading-relaxed">
-      À La petite Académie, nous offrons un environnement sécuritaire, stimulant et amusant pour vos enfants. Notre équipe dévouée favorise l'épanouissement et la créativité dès le plus jeune âge.
-    </p>
-  </section>
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div lang="fr">
+                <h2 class="text-3xl font-bold text-center text-blue-600 mb-12">Nos Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-blue-50 p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Programme Éducatif</h3>
+                        <p class="text-gray-600">Activités stimulantes pour développer la créativité et l’apprentissage des tout-petits.</p>
+                    </div>
+                    <div class="bg-pink-50 p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-xl font-semibold text-pink-600 mb-4">Environnement Sûr</h3>
+                        <p class="text-gray-600">Un espace sécurisé et accueillant pour que les enfants s’épanouissent.</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-xl font-semibold text-yellow-600 mb-4">Repas Nutritifs</h3>
+                        <p class="text-gray-600">Menus sains et équilibrés adaptés aux besoins des jeunes enfants.</p>
+                    </div>
+                </div>
+            </div>
+            <div lang="en" class="hidden">
+                <h2 class="text-3xl font-bold text-center text-blue-600 mb-12">Our Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-blue-50 p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-xl font-semibold text-blue-600 mb-4">Educational Program</h3>
+                        <p class="text-gray-600">Engaging activities to foster creativity and learning for young children.</p>
+                    </div>
+                    <div class="bg-pink-50 p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-xl font-semibold text-pink-600 mb-4">Safe Environment</h3>
+                        <p class="text-gray-600">A secure and welcoming space for children to thrive.</p>
+                    </div>
+                    <div class="bg-yellow-50 p-6 rounded-lg shadow-md text-center">
+                        <h3 class="text-xl font-semibold text-yellow-600 mb-4">Nutritious Meals</h3>
+                        <p class="text-gray-600">Healthy and balanced menus tailored to young children’s needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <!-- Programs -->
-  <section id="programs" class="bg-white py-16">
-    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="text-center p-6 bg-pink-50 rounded-2xl shadow">
-        <h3 class="text-2xl font-semibold text-pink-600 mb-2">Nourrissons</h3>
-        <p class="text-gray-600">Accompagnement personnalisé pour les tout-petits (0-12 mois).</p>
-      </div>
-      <div class="text-center p-6 bg-yellow-50 rounded-2xl shadow">
-        <h3 class="text-2xl font-semibold text-yellow-600 mb-2">Tout-petits</h3>
-        <p class="text-gray-600">Activités adaptées pour stimuler vos enfants (1-3 ans).</p>
-      </div>
-      <div class="text-center p-6 bg-green-50 rounded-2xl shadow">
-        <h3 class="text-2xl font-semibold text-green-600 mb-2">Préscolaire</h3>
-        <p class="text-gray-600">Préparation douce à l'école pour les 3-5 ans.</p>
-      </div>
-    </div>
-  </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4 text-center">
+            <div lang="fr">
+                <h2 class="text-3xl font-bold text-blue-600 mb-8">Contactez-nous</h2>
+                <p class="text-lg text-gray-700 mb-4">3401 Rue Ontario E, Montréal, QC H1W 1R1</p>
+                <p class="text-lg text-gray-700 mb-4">Téléphone : <a href="tel:+14389264166" class="text-blue-600 hover:underline">438-926-4166</a></p>
+                <p class="text-lg text-gray-700 mb-8">Pour toute question ou pour inscrire votre enfant, contactez-nous dès aujourd’hui !</p>
+                <a href="mailto:info@lapetiteacademie.com" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700">Envoyer un courriel</a>
+            </div>
+            <div lang="en" class="hidden">
+                <h2 class="text-3xl font-bold text-blue-600 mb-8">Contact Us</h2>
+                <p class="text-lg text-gray-700 mb-4">3401 Ontario St E, Montreal, QC H1W 1R1</p>
+                <p class="text-lg text-gray-700 mb-4">Phone: <a href="tel:+14389264166" class="text-blue-600 hover:underline">438-926-4166</a></p>
+                <p class="text-lg text-gray-700 mb-8">For any questions or to enroll your child, contact us today!</p>
+                <a href="mailto:info@lapetiteacademie.com" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700">Send an Email</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- Gallery -->
-  <section id="gallery" class="max-w-6xl mx-auto px-4 py-16">
-    <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Galerie</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <!-- Placeholder images -->
-      <img src="{% static 'images/kids1.jpg' %}" alt="Kids playing" class="rounded-lg shadow">
-      <img src="{% static 'images/kids2.jpg' %}" alt="Arts and crafts" class="rounded-lg shadow">
-      <img src="{% static 'images/kids3.jpg' %}" alt="Reading time" class="rounded-lg shadow">
-      <img src="{% static 'images/kids4.jpg' %}" alt="Outdoor play" class="rounded-lg shadow">
-      <img src="{% static 'images/kids5.jpg' %}" alt="Snack time" class="rounded-lg shadow">
-      <img src="{% static 'images/kids6.jpg' %}" alt="Group activity" class="rounded-lg shadow">
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="bg-white py-16">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold text-gray-800 mb-4">Contactez-nous</h2>
-      <p class="text-gray-600 mb-2">3401 Rue Ontario E, Montréal, QC H1W 1R1</p>
-      <p class="text-gray-600 mb-4">Téléphone: <a href="tel:+14388264166" class="text-pink-500">438-826-4166</a></p>
-      <a href="tel:+14388264166" class="px-6 py-3 bg-pink-500 text-white rounded-full hover:bg-pink-600 transition">Appelez-nous</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="text-center py-6 bg-pink-100">
-    <p class="text-gray-700">© 2025 La petite Académie. Tous droits réservés.</p>
-  </footer>
+    <!-- Footer -->
+    <footer class="bg-blue-600 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 La Petite Académie. Tous droits réservés. | All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
